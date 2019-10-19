@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Code">
+      <UniqueIdentifier>{c348e608-cd1e-47f9-b23f-8a6244d8b8dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Player">
+      <UniqueIdentifier>{5f798ef3-f7a2-470b-9b09-35ec69bba64b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Enemy">
+      <UniqueIdentifier>{a5189155-152f-46fa-a22c-33e7f173e918}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Room">
+      <UniqueIdentifier>{33ef1630-2092-4045-8a3c-80532f19804e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Item">
+      <UniqueIdentifier>{4cfecba9-201e-45f1-bb7f-62f20b414721}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Boss">
+      <UniqueIdentifier>{ab350c20-ed46-43dd-ac6f-10a1db91c4e5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DiabloTextBased.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Code\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Room.cpp">
+      <Filter>Code\Room</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Code\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Code\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Code\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Log.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Player.h">
+      <Filter>Code\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Room.h">
+      <Filter>Code\Room</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Code\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Code\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Code\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Log.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
