@@ -18,8 +18,8 @@ void Log::DeleteLine(int anAmount)
 
 int Log::MultipleChoice(std::string aQuestion,std::string* someStrings,int aNumberOfChoices)
 {
-	int tempIn;
-	bool tempCorrectInput;
+	int tempIn = 0;
+	bool tempCorrectInput = false;
 	Write(aQuestion);
 	for (int i = 0; i < aNumberOfChoices; i++)
 	{
@@ -27,18 +27,18 @@ int Log::MultipleChoice(std::string aQuestion,std::string* someStrings,int aNumb
 	}
 	while (!tempCorrectInput)
 	{
-		try
+		std::cin >> tempIn;
+		if ((tempIn <= aNumberOfChoices) && (tempIn > 0)) 
 		{
-			std::cin >> tempIn;
 			tempCorrectInput = true;
+			return (tempIn - 1);
 		}
-		catch (int tempExeption)
+		else
 		{
-			(tempIn > aNumberOfChoices) || (tempIn < 0);
+			DeleteLine(1);
 		}
 	}
 
-	system("CLS");
+	//system("CLS");
 
-	return (tempIn - 1);
 }
