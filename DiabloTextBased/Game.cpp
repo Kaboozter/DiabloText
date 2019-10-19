@@ -22,9 +22,6 @@ void Game::Initialize()
 	{
 		Player player;
 		Log log;
-		//log.Write("What is your race?\nHuman\nDwarf\nElf\nHalfling\nWrite your choice");
-
-		//std::cin >> myInput;
 
 		switch (log.MultipleChoice("What is your race?", new std::string[4]{ "Human","Dwarf","Elf","Halfling" }, 4))
 		{

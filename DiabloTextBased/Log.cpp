@@ -31,9 +31,8 @@ int Log::MultipleChoice(std::string aQuestion,std::string* someStrings,int aNumb
 		{
 			std::cin >> tempIn;
 			tempCorrectInput = true;
-			Write("hello");
 		}
-		catch (int exp)
+		catch (int tempExeption)
 		{
 			(tempIn > aNumberOfChoices) || (tempIn < 0);
 		}
