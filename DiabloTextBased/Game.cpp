@@ -30,25 +30,25 @@ void Game::Initialize()
 			log.Write("Human Stats:");
 			player.myRace = Player::Human;
 			player.SetStats(true);
-			DisplayStats(player,log);
+			DisplayStats(player,log, true);
 			break;
 		case Player::Dwarf:
 			log.Write("Dwarf Stats:");
 			player.myRace = Player::Dwarf;
 			player.SetStats(true);
-			DisplayStats(player, log);
+			DisplayStats(player, log, true);
 			break;
 		case Player::Elf:
 			log.Write("Elf Stats");
 			player.myRace = Player::Elf;
 			player.SetStats(true);
-			DisplayStats(player,log);
+			DisplayStats(player,log, true);
 			break;
 		case Player::Halfling:
 			log.Write("Halfling Stats");
 			player.myRace = Player::Halfling;
 			player.SetStats(true);
-			DisplayStats(player,log);
+			DisplayStats(player,log, true);
 			break;
 		}
 
@@ -67,19 +67,19 @@ void Game::Initialize()
 			log.Write("Warrior stats");
 			player.myClass = 0;
 			player.SetStats(false);
-			DisplayStats(player, log);
+			DisplayStats(player, log, true);
 			break;
 		case 1:
 			log.Write("Theif stats");
 			player.myClass = 1;
 			player.SetStats(false);
-			DisplayStats(player, log);
+			DisplayStats(player, log, true);
 			break;
 		case 2:
 			log.Write("Ranger stats");
 			player.myClass = 2;
 			player.SetStats(false);
-			DisplayStats(player, log);
+			DisplayStats(player, log, true);
 			break;
 		}
 
@@ -94,15 +94,22 @@ void Game::Initialize()
 	}
 }
 
-void Game::Update(Player aPlayer, Log aLog)
+void Game::Update(Player& aPlayer, Log aLog)
 {
 	system("CLS");
-	switch (aLog.MultipleChoice("What will you do?", new std::string[6]{ "Travel", "Rest", "Level Up", "Shop", "Craft", "Quit" }, 6)) 
+	switch (aLog.MultipleChoice("What will you do?", new std::string[7]{ "Travel", "Rest", "Level Up", "Character Sheet", "Shop", "Craft", "Quit" }, 6)) 
 	{
 	case 0:
 		switch (aLog.MultipleChoice("Where will you go?", new std::string[4]{"Forwards","Left","Right","Back"},4))
 		{
-		default:
+		case 0:
+
+			break;
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
 			break;
 		}
 		break;
@@ -110,6 +117,7 @@ void Game::Update(Player aPlayer, Log aLog)
 		aPlayer.myHp += aPlayer.myMaxHp / 5;
 		aLog.Write("You Regained" + std::to_string(aPlayer.myMaxHp / 5) + "HP!");
 		aLog.Write(std::to_string(aPlayer.myHp) + "/" + std::to_string(aPlayer.myMaxHp));
+		system("pause");
 		break;
 	case 2:
 		if (aPlayer.myXp >= (aPlayer.myLevel*100)) {
@@ -124,13 +132,18 @@ void Game::Update(Player aPlayer, Log aLog)
 		{
 			aLog.Write("Not Enough Xp");
 			aLog.Write(std::to_string(aPlayer.myXp) + "/" + std::to_string(aPlayer.myLevel*100) + "Xp");
+			system("Pause");
 		}
 		break;
 	case 3:
+		DisplayStats(aPlayer,aLog, false);
+		system("pause");
 		break;
 	case 4:
 		break;
 	case 5:
+		break;
+	case 6:
 		myLoop = false;
 		break;
 
@@ -139,8 +152,17 @@ void Game::Update(Player aPlayer, Log aLog)
 
 }
 
-void Game::DisplayStats(Player aPlayer, Log aLog)
+void Game::DisplayStats(Player& aPlayer, Log aLog, bool someOnlyStats)
 {
+	if (!someOnlyStats) 
+	{
+		std::cout << "HP:";
+		aLog.Write(std::to_string(aPlayer.myMaxHp));
+		std::cout << "Level:";
+		aLog.Write(std::to_string(aPlayer.myLevel));
+		std::cout << "Xp:";
+		aLog.Write(std::to_string(aPlayer.myXp) + "/" + std::to_string(aPlayer.myLevel * 100) + "\n");
+	}
 	std::cout << "Str:";
 	aLog.Write(std::to_string(aPlayer.myStr));
 	std::cout << "Speed:";

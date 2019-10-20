@@ -7,8 +7,8 @@ class Game
 {
 public:
 	void Initialize();
-	void Update(Player aPlayer, Log aLog);
-	void DisplayStats(Player aPlayer, Log aLog);
+	void Update(Player& aPlayer, Log aLog);
+	void DisplayStats(Player& aPlayer, Log aLog, bool someOnlyStats);
 	bool YesNo(Log aLog);
 };
 
