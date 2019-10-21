@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "item.h";
 #include "Log.h";
+#include "Enemy.h";
 
 std::string myInput;
 Player::Race hash(std::string aInString)
@@ -19,7 +20,7 @@ bool myLoop = true;
 
 void Game::Initialize()
 {
-	Player player;
+	Player player();
 	Log log;
 
 	while (myLoop)
@@ -97,7 +98,7 @@ void Game::Initialize()
 void Game::Update(Player& aPlayer, Log aLog)
 {
 	system("CLS");
-	switch (aLog.MultipleChoice("What will you do?", new std::string[7]{ "Travel", "Rest", "Level Up", "Character Sheet", "Shop", "Craft", "Quit" }, 6)) 
+	switch (aLog.MultipleChoice("What will you do?", new std::string[7]{ "Travel", "Rest", "Level Up", "Character Sheet", "Shop", "Craft", "Quit" }, 7)) 
 	{
 	case 0:
 		switch (aLog.MultipleChoice("Where will you go?", new std::string[4]{"Forwards","Left","Right","Back"},4))
@@ -114,13 +115,24 @@ void Game::Update(Player& aPlayer, Log aLog)
 		}
 		break;
 	case 1:
-		aPlayer.myHp += aPlayer.myMaxHp / 5;
-		aLog.Write("You Regained" + std::to_string(aPlayer.myMaxHp / 5) + "HP!");
+		if (aPlayer.myHp < aPlayer.myMaxHp)
+		{
+			aPlayer.myHp += aPlayer.myMaxHp / 5;
+			aLog.Write("You Regained" + std::to_string(aPlayer.myMaxHp / 5) + "HP!");
+			if (aPlayer.myHp > aPlayer.myMaxHp)
+			{
+				aPlayer.myHp = aPlayer.myMaxHp;
+			}
+		}
+		else if (aPlayer.myHp >= aPlayer.myMaxHp)
+		{
+			aLog.Write("You are already at max HP");
+		}
 		aLog.Write(std::to_string(aPlayer.myHp) + "/" + std::to_string(aPlayer.myMaxHp));
 		system("pause");
 		break;
 	case 2:
-		if (aPlayer.myXp >= (aPlayer.myLevel*100)) {
+		if (aPlayer.myXp >= (aPlayer.myLevel * 100)) {
 			aPlayer.myXp -= (aPlayer.myLevel * 100);
 			aPlayer.myLevel++;
 			aLog.Write("You leveled up!\nNew level:" + std::to_string(aPlayer.myLevel));
@@ -130,7 +142,7 @@ void Game::Update(Player& aPlayer, Log aLog)
 		}
 		else 
 		{
-			aLog.Write("Not Enough Xp");
+			aLog.Write("Not Enough Xp ");
 			aLog.Write(std::to_string(aPlayer.myXp) + "/" + std::to_string(aPlayer.myLevel*100) + "Xp");
 			system("Pause");
 		}
@@ -173,6 +185,13 @@ void Game::DisplayStats(Player& aPlayer, Log aLog, bool someOnlyStats)
 	aLog.Write(std::to_string(aPlayer.myDef));
 	std::cout << "Acc:";
 	aLog.Write(std::to_string(aPlayer.myAcc));
+}
+
+void Game::Fight(Player& aPlayer, Log& aLog)
+{
+	Enemy enemy;
+
+
 }
 
 bool Game::YesNo(Log aLog) 
