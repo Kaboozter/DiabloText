@@ -13,13 +13,13 @@ class Player
 			Halfling
 		};
 		int myStr, mySpeed, myLuck, myDef, myAcc;
-		int myHealth, myLevel, myXp;
-	    int myRace;
+		int myHp, myMaxHp, myLevel, myXp;
+	    int myRace, myClass;
 
 		Player();
 
 		void Update();
-		void SetStats();
+		void SetStats(bool aRaceOrClass);
 
 	private:
 

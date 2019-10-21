@@ -12,7 +12,7 @@ class Room
 			SafeZone,
 			BossRoom,
 		};
-		int myRoomType;
+		int myRoomType, myNumEntrances;
 
 	private:
 		float mySpawnRateEnemy, mySpawnRateLoot;

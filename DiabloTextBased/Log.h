@@ -1,4 +1,5 @@
-#pragma once
+#ifndef LOG_HEADER
+#define LOG_HEADER
 #include <iostream>
 
 class Log
@@ -11,4 +12,6 @@ public:
 private:
 
 };
+
+#endif
 
