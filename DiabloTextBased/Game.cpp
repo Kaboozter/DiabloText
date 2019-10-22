@@ -20,40 +20,40 @@ bool myLoop = true;
 
 void Game::Initialize()
 {
-	Player player();
-	Log log;
+	Player myPlayer;
+	Log myLog;
 
 	while (myLoop)
 	{
-		switch (log.MultipleChoice("What is your race?", new std::string[4]{ "Human","Dwarf","Elf","Halfling" }, 4))
+		switch (myLog.MultipleChoice("What is your race?", new std::string[4]{ "Human","Dwarf","Elf","Halfling" }, 4))
 		{
 		case Player::Human:
-			log.Write("Human Stats:");
-			player.myRace = Player::Human;
-			player.SetStats(true);
-			DisplayStats(player,log, true);
+			myLog.Write("Human Stats:");
+			myPlayer.myRace = Player::Human;
+			myPlayer.SetStats(true);
+			DisplayStats(myPlayer,myLog, true);
 			break;
 		case Player::Dwarf:
-			log.Write("Dwarf Stats:");
-			player.myRace = Player::Dwarf;
-			player.SetStats(true);
-			DisplayStats(player, log, true);
+			myLog.Write("Dwarf Stats:");
+			myPlayer.myRace = Player::Dwarf;
+			myPlayer.SetStats(true);
+			DisplayStats(myPlayer, myLog, true);
 			break;
 		case Player::Elf:
-			log.Write("Elf Stats");
-			player.myRace = Player::Elf;
-			player.SetStats(true);
-			DisplayStats(player,log, true);
+			myLog.Write("Elf Stats");
+			myPlayer.myRace = Player::Elf;
+			myPlayer.SetStats(true);
+			DisplayStats(myPlayer,myLog, true);
 			break;
 		case Player::Halfling:
-			log.Write("Halfling Stats");
-			player.myRace = Player::Halfling;
-			player.SetStats(true);
-			DisplayStats(player,log, true);
+			myLog.Write("Halfling Stats");
+			myPlayer.myRace = Player::Halfling;
+			myPlayer.SetStats(true);
+			DisplayStats(myPlayer,myLog, true);
 			break;
 		}
 
-		myLoop = YesNo(log);
+		myLoop = YesNo(myLog);
 
 	}
 
@@ -61,37 +61,37 @@ void Game::Initialize()
 
 	while (myLoop)
 	{
-		player.SetStats(true);
-		switch (log.MultipleChoice("What is your class?", new std::string[3]{ "Warrior","Theif","Ranger" }, 3))
+		myPlayer.SetStats(true);
+		switch (myLog.MultipleChoice("What is your class?", new std::string[3]{ "Warrior","Theif","Ranger" }, 3))
 		{
 		case 0:
-			log.Write("Warrior stats");
-			player.myClass = 0;
-			player.SetStats(false);
-			DisplayStats(player, log, true);
+			myLog.Write("Warrior stats");
+			myPlayer.myClass = 0;
+			myPlayer.SetStats(false);
+			DisplayStats(myPlayer, myLog, true);
 			break;
 		case 1:
-			log.Write("Theif stats");
-			player.myClass = 1;
-			player.SetStats(false);
-			DisplayStats(player, log, true);
+			myLog.Write("Theif stats");
+			myPlayer.myClass = 1;
+			myPlayer.SetStats(false);
+			DisplayStats(myPlayer, myLog, true);
 			break;
 		case 2:
-			log.Write("Ranger stats");
-			player.myClass = 2;
-			player.SetStats(false);
-			DisplayStats(player, log, true);
+			myLog.Write("Ranger stats");
+			myPlayer.myClass = 2;
+			myPlayer.SetStats(false);
+			DisplayStats(myPlayer, myLog, true);
 			break;
 		}
 
-		myLoop = YesNo(log);
+		myLoop = YesNo(myLog);
 	}
 
 	myLoop = true;
 
 	while (myLoop)
 	{
-		Update(player, log);
+		Update(myPlayer, myLog);
 	}
 }
 
@@ -189,9 +189,26 @@ void Game::DisplayStats(Player& aPlayer, Log aLog, bool someOnlyStats)
 
 void Game::Fight(Player& aPlayer, Log& aLog)
 {
-	Enemy enemy;
+	Enemy enemy(5);
 
+	bool myLoop = true;
 
+	while (myLoop)
+	{
+		switch (aLog.MultipleChoice("What Will You Do?", new std::string[4]{"Fight", "Block", "Heal", "Run away"}, 4))
+		{
+		case 0:
+			break;
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		}
+	}
+
+	enemy.~Enemy();
 }
 
 bool Game::YesNo(Log aLog) 

@@ -7,3 +7,8 @@ Enemy::Enemy(int aLevelOfEnemy)
 	myName = myNames[(aLevelOfEnemy - 1)];
 }
 
+Enemy::~Enemy()
+{
+
+}
+
