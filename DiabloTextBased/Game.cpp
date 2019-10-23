@@ -1,5 +1,6 @@
 #include <iostream>
 #include <conio.h>
+#include <vector>
 #include "Game.h"
 #include "Room.h"
 #include "Player.h"
@@ -160,8 +161,8 @@ void Game::Update(Player& aPlayer, Log aLog)
 		break;
 
 	}
-
-
+	
+	
 }
 
 void Game::DisplayStats(Player& aPlayer, Log aLog, bool someOnlyStats)
@@ -198,6 +199,7 @@ void Game::Fight(Player& aPlayer, Log& aLog)
 		switch (aLog.MultipleChoice("What Will You Do?", new std::string[4]{"Fight", "Block", "Heal", "Run away"}, 4))
 		{
 		case 0:
+			enemy.myHp -= ();
 			break;
 		case 1:
 			break;

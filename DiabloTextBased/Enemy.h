@@ -8,7 +8,7 @@ class Enemy
 		int myHp, myAttack, myDef, myAcc, mySpeed;
 		int myXpGive, myLevel;
 		std::string myName;
-		std::string myNames [8];
+		std::string* myNames;
 
 		Enemy(int aLevelOfEnemy);
 		~Enemy();

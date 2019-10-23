@@ -1,6 +1,8 @@
 #ifndef PLAYER_HEADER
 #define PLAYER_HEADER
 
+#include "Item.h";
+
 class Player
 {
 	
@@ -16,7 +18,10 @@ class Player
 		int myHp, myMaxHp, myLevel, myXp;
 	    int myRace, myClass;
 
+		Item* items;
+
 		Player();
+		~Player();
 
 		void Update();
 		void SetStats(bool aRaceOrClass);

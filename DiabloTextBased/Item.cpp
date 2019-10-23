@@ -16,5 +16,6 @@ int Weapons::CalWeaponPot(int aQuality, int aType)
 	{
 		tempPot = aQuality * 25;
 	}
+
 	return tempPot;
 }

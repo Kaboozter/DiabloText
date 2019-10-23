@@ -9,9 +9,20 @@ Player::Player() {
 	myStr = 0, mySpeed = 0, myLuck = 0, myDef = 0, myAcc = 0;
 }
 
+Player::~Player()
+{
+	delete[](items);
+}
+
 void Player::Update() {
+	
 
-
+	Player::Race race = Human;
+	switch (race)
+	{
+	case Human:
+		break;
+	}
 }
 
 void Player::SetStats(bool aRaceOrClass)
