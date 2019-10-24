@@ -23,6 +23,9 @@ void Game::Initialize()
 {
 	Player myPlayer;
 	Log myLog;
+	Weapons myWeapon(0, rand() % 3 + 1, "Starter");
+	
+	myPlayer.items[0] = myWeapon;
 
 	while (myLoop)
 	{
@@ -175,6 +178,11 @@ void Game::DisplayStats(Player& aPlayer, Log aLog, bool someOnlyStats)
 		aLog.Write(std::to_string(aPlayer.myLevel));
 		std::cout << "Xp:";
 		aLog.Write(std::to_string(aPlayer.myXp) + "/" + std::to_string(aPlayer.myLevel * 100) + "\n");
+
+		for (int i = 0; i < sizeof(aPlayer.items);i ++)
+		{
+			aLog.Write(aPlayer.items[i].myName);
+		}
 	}
 	std::cout << "Str:";
 	aLog.Write(std::to_string(aPlayer.myStr));
@@ -199,7 +207,7 @@ void Game::Fight(Player& aPlayer, Log& aLog)
 		switch (aLog.MultipleChoice("What Will You Do?", new std::string[4]{"Fight", "Block", "Heal", "Run away"}, 4))
 		{
 		case 0:
-			enemy.myHp -= ();
+			enemy.myHp -= (aPlayer.items[0].myPotency);
 			break;
 		case 1:
 			break;

@@ -3,19 +3,24 @@
 
 int Weapons::CalWeaponPot(int aQuality, int aType)
 {
-	int tempPot;
 	if (aType == Weapons::TypeSword)
 	{
-		tempPot = aQuality * 20;
+		return (aQuality + 1) * 20;
 	}
 	if (aType == Weapons::TypeBow)
 	{
-		tempPot = aQuality * 15;
+		return (aQuality + 1) * 15;
 	}
 	if (aType == Weapons::TypeHammer)
 	{
-		tempPot = aQuality * 25;
+		return (aQuality + 1) * 25;
 	}
+}
 
-	return tempPot;
+Weapons::Weapons(int aQual, int aType, std::string aName)
+{
+	myQuality = aQual;
+	myType = aType;
+	myName = aName;
+	myPotency = CalWeaponPot(myQuality, myType);
 }

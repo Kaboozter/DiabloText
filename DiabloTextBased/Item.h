@@ -48,8 +48,8 @@ public:
 
 	int myStr, mySpeed, myLuck, myAcc;
 
-	Weapons();
-	~Weapons();
+	Weapons(int aQual, int aType, std::string aName);
+	//~Weapons();
 
 	int CalWeaponPot(int aQual, int aType);
 

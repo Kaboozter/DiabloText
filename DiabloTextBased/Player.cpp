@@ -1,17 +1,19 @@
 #include "Player.h"
 #include <iostream>
 
+
 Player::Player() {
 	myRace = Elf;
 	myLevel = 1, myXp = 100;
 	myMaxHp = myLevel * 20, myHp = myMaxHp;
 	myClass = 0;
 	myStr = 0, mySpeed = 0, myLuck = 0, myDef = 0, myAcc = 0;
+	std::string* items = new std::string[5];
 }
 
 Player::~Player()
 {
-	delete[](items);
+	//delete[](items);
 }
 
 void Player::Update() {
