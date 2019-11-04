@@ -2,20 +2,21 @@
 #include <conio.h>
 #include <vector>
 #include "Game.h"
-#include "Room.h"
+#include "item.h"
+#include "Enemy.h"
 #include "Player.h"
-#include "item.h";
-#include "Log.h";
-#include "Enemy.h";
+#include "Log.h"
+#include "Room.h"
 
 std::string myInput;
-Player::Race hash(std::string aInString)
-{
-	if (aInString == "Human" || aInString == "human") return Player::Human;
-	else if (aInString == "Dwarf" || aInString == "dwarf") return Player::Dwarf;
-	else if (aInString == "Elf" || aInString == "elf") return Player::Elf;
-	else if (aInString == "Halfling" || aInString == "halfling") return Player::Halfling;
-}
+
+//Player::Race hash(std::string aInString)
+//{
+//	if (aInString == "Human" || aInString == "human") return Player::Human;
+//	else if (aInString == "Dwarf" || aInString == "dwarf") return Player::Dwarf;
+//	else if (aInString == "Elf" || aInString == "elf") return Player::Elf;
+//	else if (aInString == "Halfling" || aInString == "halfling") return Player::Halfling;
+//}
 
 bool myLoop = true;
 
@@ -24,8 +25,22 @@ void Game::Initialize()
 	Player myPlayer;
 	Log myLog;
 	Weapons myWeapon(0, rand() % 3 + 1, "Starter");
+	//myRooms = new Room[15]{
+	//	myRooms[0] = Room(1,2);
+	//	for (int i = 1; i < 14; i++)
+	//	{
+	//		myRooms[i] = Room(rand() % 3, rand() % 3 + 1);
+	//	}
+	//};
+
 	
-	myPlayer.items[0] = myWeapon;
+	myPlayer.myItems[0] = myWeapon;
+
+	//myRooms[0] = Room();
+	//for (int i = 1; i < std::count(myRooms); i++)
+	//{
+
+	//}
 
 	while (myLoop)
 	{
@@ -99,7 +114,7 @@ void Game::Initialize()
 	}
 }
 
-void Game::Update(Player& aPlayer, Log aLog)
+void Game::Update(Player& aPlayer, Log& aLog)
 {
 	system("CLS");
 	switch (aLog.MultipleChoice("What will you do?", new std::string[7]{ "Travel", "Rest", "Level Up", "Character Sheet", "Shop", "Craft", "Quit" }, 7)) 
@@ -168,7 +183,7 @@ void Game::Update(Player& aPlayer, Log aLog)
 	
 }
 
-void Game::DisplayStats(Player& aPlayer, Log aLog, bool someOnlyStats)
+void Game::DisplayStats(Player& aPlayer, Log& aLog, bool someOnlyStats)
 {
 	if (!someOnlyStats) 
 	{
@@ -179,9 +194,9 @@ void Game::DisplayStats(Player& aPlayer, Log aLog, bool someOnlyStats)
 		std::cout << "Xp:";
 		aLog.Write(std::to_string(aPlayer.myXp) + "/" + std::to_string(aPlayer.myLevel * 100) + "\n");
 
-		for (int i = 0; i < sizeof(aPlayer.items);i ++)
+		for (int i = 0; i < sizeof(aPlayer.myItems);i ++)
 		{
-			aLog.Write(aPlayer.items[i].myName);
+			aLog.Write(aPlayer.myItems[i].myName);
 		}
 	}
 	std::cout << "Str:";
@@ -200,20 +215,28 @@ void Game::Fight(Player& aPlayer, Log& aLog)
 {
 	Enemy enemy(5);
 
-	bool myLoop = true;
+	bool tempLoop = true;
+	int tempFleeChance = 0;
 
-	while (myLoop)
+	while (tempLoop)
 	{
-		switch (aLog.MultipleChoice("What Will You Do?", new std::string[4]{"Fight", "Block", "Heal", "Run away"}, 4))
+		switch (aLog.MultipleChoice("What Will You Do?", new std::string[4]{"Fight", "Block", "Use item", "Run away"}, 4))
 		{
 		case 0:
-			enemy.myHp -= (aPlayer.items[0].myPotency);
+			enemy.myHp -= ((aPlayer.myItems[0].myPotency * (1+(aPlayer.myStr/10)))*(1-(enemy.myDef/100)));
 			break;
 		case 1:
+
 			break;
 		case 2:
+			aPlayer.myItems[aLog.MultipleChoice("Which Item?", new std::string[5]{ aPlayer.myItems[0].myName, aPlayer.myItems[1].myName, aPlayer.myItems[2].myName, aPlayer.myItems[3].myName, aPlayer.myItems[4].myName }, 5)];
 			break;
 		case 3:
+			tempFleeChance = rand() % 100 + 1;
+			if (tempFleeChance <= (20 + aPlayer.mySpeed)) {
+				tempLoop = false;
+				aLog.Write("You successfully ran away.");
+			}
 			break;
 		}
 	}
@@ -221,7 +244,7 @@ void Game::Fight(Player& aPlayer, Log& aLog)
 	enemy.~Enemy();
 }
 
-bool Game::YesNo(Log aLog) 
+bool Game::YesNo(Log& aLog) 
 {
 	std::string tempInput;
 	aLog.Write("\nAre You Sure?(Y/N)");

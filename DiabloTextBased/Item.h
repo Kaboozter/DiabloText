@@ -1,7 +1,9 @@
 #ifndef ITEM_HEADER
 #define ITEM_HEADER
+#include <string>
+#include "Player.h"
 
-#include <string>;
+class Player;
 
 class Item
 {
@@ -29,7 +31,9 @@ public:
 		TypeHealthPotion,
 		TypeManaPotion
 	};
-	int myHello;
+
+	void UseItem(int aType, Player& aPlayer);
+
 	ConsumableItem();
 	~ConsumableItem();
 

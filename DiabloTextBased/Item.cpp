@@ -24,3 +24,10 @@ Weapons::Weapons(int aQual, int aType, std::string aName)
 	myName = aName;
 	myPotency = CalWeaponPot(myQuality, myType);
 }
+
+void ConsumableItem::UseItem(int aType, Player& aPlayer) 
+{
+	if (aType == ConsumableItem::TypeHealthPotion) {
+		aPlayer.myHp += myPotency;
+	}
+}
