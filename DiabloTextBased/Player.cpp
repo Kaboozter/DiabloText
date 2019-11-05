@@ -8,7 +8,7 @@ Player::Player() {
 	myMaxHp = myLevel * 20, myHp = myMaxHp;
 	myClass = 0;
 	myStr = 0, mySpeed = 0, myLuck = 0, myDef = 0, myAcc = 0;
-	std::string* items = new std::string[5];
+	Item* items = new Item[5];
 }
 
 Player::~Player()

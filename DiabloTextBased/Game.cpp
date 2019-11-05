@@ -204,7 +204,7 @@ void Game::Fight(Player& aPlayer, Log& aLog)
 
 	while (myLoop)
 	{
-		switch (aLog.MultipleChoice("What Will You Do?", new std::string[4]{"Fight", "Block", "Heal", "Run away"}, 4))
+		switch (aLog.MultipleChoice("What Will You Do?", new std::string[3]{"Fight", "Block", "Run away"}, 3))
 		{
 		case 0:
 			enemy.myHp -= (aPlayer.items[0].myPotency);
