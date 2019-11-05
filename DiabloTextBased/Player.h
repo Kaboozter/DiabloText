@@ -1,11 +1,12 @@
 #ifndef PLAYER_HEADER
 #define PLAYER_HEADER
 
-#include "Item.h";
+#include "Item.h"
+
+class Item;
 
 class Player
 {
-	
 	public:
 		enum Race
 		{
@@ -18,7 +19,7 @@ class Player
 		int myHp, myMaxHp, myLevel, myXp;
 	    int myRace, myClass;
 
-		Item* items;
+		Item* myItems;
 
 		Player();
 		~Player();

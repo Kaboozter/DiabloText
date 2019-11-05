@@ -4,8 +4,8 @@
 #include <iostream>
 #include "Room.h"
 #include "Player.h"
-#include "item.h";
-#include "Game.h";
+#include "item.h"
+#include "Game.h"
 
 int main()
 {
