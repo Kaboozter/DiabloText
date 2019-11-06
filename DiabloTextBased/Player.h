@@ -19,7 +19,8 @@ class Player
 		int myHp, myMaxHp, myLevel, myXp;
 	    int myRace, myClass;
 
-		Item* myItems;
+		Item* myInventory;
+		Item* myMaterialInventory;
 
 		Player();
 		~Player();
