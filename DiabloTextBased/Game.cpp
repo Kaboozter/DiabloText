@@ -10,14 +10,6 @@
 
 std::string myInput;
 
-//Player::Race hash(std::string aInString)
-//{
-//	if (aInString == "Human" || aInString == "human") return Player::Human;
-//	else if (aInString == "Dwarf" || aInString == "dwarf") return Player::Dwarf;
-//	else if (aInString == "Elf" || aInString == "elf") return Player::Elf;
-//	else if (aInString == "Halfling" || aInString == "halfling") return Player::Halfling;
-//}
-
 bool myLoop = true;
 
 void Game::Initialize()
