@@ -8,12 +8,13 @@ Player::Player() {
 	myMaxHp = myLevel * 20, myHp = myMaxHp;
 	myClass = 0;
 	myStr = 0, mySpeed = 0, myLuck = 0, myDef = 0, myAcc = 0;
-	myItems = new Item[5];
+	myInventory = new Item[5];
+	myMaterialInventory = new Item[10];
 }
 
 Player::~Player()
 {
-	delete[](myItems);
+	delete[](myInventory);
 }
 
 void Player::Update() {

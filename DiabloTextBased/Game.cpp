@@ -17,22 +17,23 @@ void Game::Initialize()
 	Player myPlayer;
 	Log myLog;
 	Weapons myWeapon(0, rand() % 3 + 1, "Starter");
-	//myRooms = new Room[15]{
-	//	myRooms[0] = Room(1,2);
-	//	for (int i = 1; i < 14; i++)
-	//	{
-	//		myRooms[i] = Room(rand() % 3, rand() % 3 + 1);
-	//	}
-	//};
+	Room(*myRooms)[5][5] = new Room[5][5][5];
 
 	
-	myPlayer.myItems[0] = myWeapon;
 
-	//myRooms[0] = Room();
-	//for (int i = 1; i < std::count(myRooms); i++)
-	//{
+	myPlayer.myInventory[0] = myWeapon;
 
-	//}
+	myRooms[0][0][0].CreateRoom(0, 3);
+	for (int i = 1; i < 5; i++)
+	{
+		for (int j = 0; j < 5; j++)
+		{
+			for (int k = 0; k < 5; k++)
+			{
+				myRooms[i][j][k].CreateRoom(2, rand() % 4 + 1);
+			}
+		}
+	}
 
 	while (myLoop)
 	{
@@ -108,7 +109,24 @@ void Game::Initialize()
 
 void Game::Update(Player& aPlayer, Log& aLog)
 {
+	int tempCurrLeft = 0, tempCurrRight = 0, tempCurrFor = 0;
 	system("CLS");
+
+	switch (myRooms[tempCurrLeft,tempCurrRight,tempCurrFor].myRoomType)
+	{
+	case 0:
+		aLog.Write("You feel safe");
+		break;
+	case 1:
+		aLog.Write("You are attacked by a Monster!!");
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	}
+
+
 	switch (aLog.MultipleChoice("What will you do?", new std::string[7]{ "Travel", "Rest", "Level Up", "Character Sheet", "Shop", "Craft", "Quit" }, 7)) 
 	{
 	case 0:
@@ -186,9 +204,9 @@ void Game::DisplayStats(Player& aPlayer, Log& aLog, bool someOnlyStats)
 		std::cout << "Xp:";
 		aLog.Write(std::to_string(aPlayer.myXp) + "/" + std::to_string(aPlayer.myLevel * 100) + "\n");
 
-		for (int i = 0; i < sizeof(aPlayer.myItems);i ++)
+		for (int i = 0; i < sizeof(aPlayer.myInventory);i ++)
 		{
-			aLog.Write(aPlayer.myItems[i].myName);
+			aLog.Write(aPlayer.myInventory[i].myName);
 		}
 	}
 	std::cout << "Str:";
@@ -215,13 +233,13 @@ void Game::Fight(Player& aPlayer, Log& aLog)
 		switch (aLog.MultipleChoice("What Will You Do?", new std::string[4]{"Fight", "Block", "Use item", "Run away"}, 4))
 		{
 		case 0:
-			enemy.myHp -= ((aPlayer.myItems[0].myPotency * (1+(aPlayer.myStr/10)))*(1-(enemy.myDef/100)));
+			enemy.myHp -= ((aPlayer.myInventory[0].myPotency * (1+(aPlayer.myStr/10)))*(1-(enemy.myDef/100)));
 			break;
 		case 1:
 
 			break;
 		case 2:
-			aPlayer.myItems[aLog.MultipleChoice("Which Item?", new std::string[5]{ aPlayer.myItems[0].myName, aPlayer.myItems[1].myName, aPlayer.myItems[2].myName, aPlayer.myItems[3].myName, aPlayer.myItems[4].myName }, 5)];
+			aPlayer.myInventory[aLog.MultipleChoice("Which Item?", new std::string[5]{ aPlayer.myInventory[0].myName, aPlayer.myInventory[1].myName, aPlayer.myInventory[2].myName, aPlayer.myInventory[3].myName, aPlayer.myInventory[4].myName }, 5)];
 			break;
 		case 3:
 			tempFleeChance = rand() % 100 + 1;

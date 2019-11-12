@@ -7,17 +7,19 @@ class Room
 	public:
 		enum RoomType
 		{
+			RoomSafeZone,
 			RoomTreasure,
 			RoomArena,
-			RoomSafeZone,
 			RoomBoss,
 		};
 		int myRoomType, myNumEntrances;
 
 		int* myConnectedRooms;
 
-		Room(int aRoomType, int aNumEntrance);
+		Room();
 		~Room();
+		
+		void CreateRoom(int aType, int aNumEntrance);
 
 	private:
 		float mySpawnRateEnemy, mySpawnRateLoot;
