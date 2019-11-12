@@ -126,7 +126,7 @@ void Game::Update(Player& aPlayer, Log& aLog)
 		aLog.Write("You feel safe");
 		break;
 	case 1:
-
+		aLog.Write("You are attacked by a Monster!!");
 		break;
 	case 2:
 		break;
