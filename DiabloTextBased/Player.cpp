@@ -5,11 +5,11 @@
 Player::Player() {
 	myRace = Elf;
 	myLevel = 1, myXp = 100;
-	myMaxHp = myLevel * 20, myHp = myMaxHp;
+	myMaxHp = myLevel * 30, myHp = myMaxHp;
 	myClass = 0;
 	myStr = 0, mySpeed = 0, myLuck = 0, myDef = 0, myAcc = 0;
-	myInventory = new Item[5];
-	myMaterialInventory = new Item[10];
+	myInventory = new Weapons[9];
+	myMaterialInventory = new Materials[10];
 }
 
 Player::~Player()
@@ -87,4 +87,9 @@ void Player::SetStats(bool aRaceOrClass)
 	}
 }
 
+void Player::LevelUp() {
+	myMaxHp = myLevel * 30;
+	myHp = myMaxHp;
+	myStr += 1, mySpeed += 1, myLuck += 1, myDef += 1, myAcc += 1;
+}
 

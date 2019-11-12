@@ -4,6 +4,8 @@
 #include "Item.h"
 
 class Item;
+class Weapons;
+class Materials;
 
 class Player
 {
@@ -15,12 +17,15 @@ class Player
 			Elf,
 			Halfling
 		};
-		int myStr, mySpeed, myLuck, myDef, myAcc;
-		int myHp, myMaxHp, myLevel, myXp;
+		float myStr, mySpeed, myLuck, myDef, myAcc;
+		float myHp, myMaxHp, myLevel, myXp;
 	    int myRace, myClass;
 
-		Item* myInventory;
-		Item* myMaterialInventory;
+		ConsumableItem myPotion;
+		Weapons* myInventory;
+		Materials* myMaterialInventory;
+
+		void LevelUp();
 
 		Player();
 		~Player();

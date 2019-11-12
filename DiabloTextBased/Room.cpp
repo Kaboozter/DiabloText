@@ -1,19 +1,17 @@
 #include "Room.h"
+#include <iostream>
 
 Room::Room() 
 {
 	myRoomType = 0;
-	myNumEntrances = 0;
 }
 
-void Room::CreateRoom(int aType, int aNumEntrance)
+void Room::CreateRoom(int aType)
 {
 	myRoomType = aType;
-	myNumEntrances = aNumEntrance;
-	myConnectedRooms = new int[myNumEntrances];
+	myRoomCleared = false;
 }
 
 Room::~Room()
 {
-	delete[](myConnectedRooms);
 }

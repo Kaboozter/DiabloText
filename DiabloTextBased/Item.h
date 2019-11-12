@@ -2,6 +2,7 @@
 #define ITEM_HEADER
 #include <string>
 #include "Player.h"
+#include "Log.h"
 
 class Player;
 
@@ -19,6 +20,7 @@ class Item
 		std::string myName = " ";
 		int myType, myQuality, myPotency;
 
+
 	private:
 
 };
@@ -29,12 +31,13 @@ public:
 	enum Type
 	{
 		TypeHealthPotion,
-		TypeManaPotion
 	};
 
-	void UseItem(int aType, Player& aPlayer);
+	void UseItem(Player& aPlayer);
 
-	ConsumableItem();
+	int myAmount;
+
+	ConsumableItem(int aQual);
 	~ConsumableItem();
 
 private:
@@ -50,10 +53,12 @@ public:
 		TypeHammer
 	};
 
-	int myStr, mySpeed, myLuck, myAcc;
+	int myStr, mySpeed, myLuck, myDef, myAcc;
+
+	void CreateWeapon();
 
 	Weapons(int aQual, int aType, std::string aName);
-	//~Weapons();
+	~Weapons();
 
 	int CalWeaponPot(int aQual, int aType);
 
@@ -62,18 +67,28 @@ private:
 
 };
 
-class Armor : public Item
+class Materials : public Item
 {
 public:
 	enum Type
 	{
-		TypeChestplate,
-		TypeHelmet,
-		TypeBoots
+		GoblinTooth,
+		WolfPelt,
+		OgreBones,
+		GiantHead,
+		DragonScales,
+		DivineSpark,
+		DraconicCore
 	};
-	Armor();
-	~Armor();
+
+	std::string myResultName1, myResultName2;
+	float myStr, mySpeed, myLuck, myDef, myAcc;
+	int myAmount;
+
+	Materials(int aType);
+	~Materials();
 
 private:
 };
+
 #endif

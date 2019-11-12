@@ -1,6 +1,7 @@
 #ifndef ROOM_HEADER
 #define ROOM_HEADER
 
+
 class Room
 {
 
@@ -12,14 +13,13 @@ class Room
 			RoomArena,
 			RoomBoss,
 		};
-		int myRoomType, myNumEntrances;
-
-		int* myConnectedRooms;
+		int myRoomType;
+		bool myRoomCleared;
 
 		Room();
 		~Room();
 		
-		void CreateRoom(int aType, int aNumEntrance);
+		void CreateRoom(int aType);
 
 	private:
 		float mySpawnRateEnemy, mySpawnRateLoot;
