@@ -18,7 +18,8 @@ class Item
 		};
 
 		std::string myName = " ";
-		int myType, myQuality, myPotency;
+		int myType, myQuality;
+		float myPotency;
 
 
 	private:

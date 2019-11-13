@@ -8,9 +8,11 @@ Player::Player() {
 	myMaxHp = myLevel * 30, myHp = myMaxHp;
 	myClass = 0;
 	myStr = 0, mySpeed = 0, myLuck = 0, myDef = 0, myAcc = 0;
+	myDead = false;
 	myInventory = new Weapons[7];
 	myMaterialInventory = new Materials[7];
 	myPotion = ConsumableItem();
+	myPotion.GiveQuality(0);
 	myEquipedWeapon = Weapons();
 }
 

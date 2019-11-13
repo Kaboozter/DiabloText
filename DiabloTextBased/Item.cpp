@@ -63,7 +63,7 @@ ConsumableItem::~ConsumableItem()
 
 void ConsumableItem::GiveQuality(int aQual)
 {
-	myPotency = ((aQual + 1) * 25);
+	myPotency = ((aQual + 1) * 0.25f);
 }
 
 Materials::Materials() {
@@ -138,7 +138,7 @@ void Materials::CreateMaterial(int aType)
 		myLuck = 12;
 		myDef = 12;
 		myAcc = 12;
-		myQuality = 3;
+		myQuality = 2;
 	}
 	if (myType == 5)
 	{
@@ -150,7 +150,7 @@ void Materials::CreateMaterial(int aType)
 		myLuck = 18;
 		myDef = 18;
 		myAcc = 18;
-		myQuality = 4;
+		myQuality = 3;
 	}
 	if (myType == 6)
 	{
@@ -162,6 +162,6 @@ void Materials::CreateMaterial(int aType)
 		myLuck = 30;
 		myDef = 30;
 		myAcc = 30;
-		myQuality = 4;
+		myQuality = 3;
 	}
 }

@@ -189,7 +189,7 @@ void Game::Initialize()
 void Game::Update(Player& aPlayer, Log& aLog)
 {
 	system("CLS");
-
+	
 	aLog.Write(std::to_string(myCurrRoom));
 	switch (myRooms[myCurrRoom].myRoomType)
 	{
@@ -214,154 +214,151 @@ void Game::Update(Player& aPlayer, Log& aLog)
 		break;
 	}
 	aLog.Write(std::to_string(myCurrRoom));
-
-	switch (aLog.MultipleChoice("What will you do?", new std::string[8]{ "Continue", "Rest", "Level Up", "Character Sheet", "Equip Weapon", "Shop", "Craft", "Quit" }, 8)) 
-	{
-	case 0:
-		switch (aLog.MultipleChoice("Where will you go?", new std::string[2]{"Onward","Back"},2))
+	if (!aPlayer.myDead) {
+		switch (aLog.MultipleChoice("What will you do?", new std::string[7]{ "Continue", "Rest", "Level Up", "Character Sheet", "Equip Weapon", "Craft", "Quit" }, 7))
 		{
 		case 0:
-			if (myRooms[myCurrRoom].myRoomType != 3) {
-				myRooms[myCurrRoom].myRoomCleared = false;
-			}
-			myCurrRoom++;
-			break;
-		case 1:
-			if (myRooms[myCurrRoom].myRoomType != 3) {
-				myRooms[myCurrRoom].myRoomCleared = false;
-			}
-			if (myCurrRoom < (myCurrStage * 5)) {
-				myCurrRoom--;
-			}
-			break;
-		}
-		break;
-	case 1:
-		if (aPlayer.myHp < aPlayer.myMaxHp)
-		{
-			aPlayer.myHp += aPlayer.myMaxHp / 5;
-			aLog.Write("You Regained" + std::to_string(aPlayer.myMaxHp / 5) + "HP!");
-			if (aPlayer.myHp > aPlayer.myMaxHp)
-			{
-				aPlayer.myHp = aPlayer.myMaxHp;
-			}
-		}
-		else if (aPlayer.myHp >= aPlayer.myMaxHp)
-		{
-			aLog.Write("You are already at max HP");
-		}
-		aLog.Write(std::to_string(aPlayer.myHp) + "/" + std::to_string(aPlayer.myMaxHp));
-		system("pause");
-		break;
-	case 2:
-		if (aPlayer.myXp >= (aPlayer.myLevel * 100)) {
-			aPlayer.myXp -= (aPlayer.myLevel * 100);
-			aPlayer.myLevel++;
-			aLog.Write("You leveled up!\nNew level:" + std::to_string(aPlayer.myLevel));
-			aLog.Write(std::to_string(aPlayer.myXp) + "/" + std::to_string(aPlayer.myLevel * 100) + "Xp\n");
-			aPlayer.LevelUp();
-			system("Pause");
-			
-		}
-		else 
-		{
-			aLog.Write("Not Enough Xp ");
-			aLog.Write(std::to_string(aPlayer.myXp) + "/" + std::to_string(aPlayer.myLevel*100) + "Xp");
-			system("Pause");
-		}
-		break;
-	case 3:
-		DisplayStats(aPlayer,aLog, false);
-
-		system("pause");
-		break;
-	case 4:
-		switch (aLog.MultipleChoice("Which Weapon?", new std::string[7]{aPlayer.myInventory[0].myName,aPlayer.myInventory[1].myName,
-			aPlayer.myInventory[2].myName,aPlayer.myInventory[3].myName,
-			aPlayer.myInventory[4].myName,aPlayer.myInventory[5].myName,
-			aPlayer.myInventory[6].myName},7))
-		{
-		case 0:
-			EquipWeapon(aPlayer, aLog, aPlayer.myInventory[0]);
-			break;
-		case 1:
-			EquipWeapon(aPlayer, aLog, aPlayer.myInventory[1]);
-			break;
-		case 2:
-			EquipWeapon(aPlayer, aLog, aPlayer.myInventory[2]);
-			break;
-		case 3:
-			EquipWeapon(aPlayer, aLog, aPlayer.myInventory[3]);
-			break;
-		case 4:
-			EquipWeapon(aPlayer, aLog, aPlayer.myInventory[4]);
-			break;
-		case 5:
-			EquipWeapon(aPlayer, aLog, aPlayer.myInventory[5]);
-			break;
-		case 6:
-			EquipWeapon(aPlayer, aLog, aPlayer.myInventory[6]);
-			break;
-		}
-		break;
-	case 5:
-		if (myRooms[myCurrRoom].myRoomType == 0) {
-			//switch (aLog.MultipleChoice("What do you wish to buy?", new std::string[]))
-			//{
-			//default:
-			//	break;
-			//}
-		}
-		break;
-	case 6:
-		
-		if (myRooms[myCurrRoom].myRoomType == 0) {
-			switch (aLog.MultipleChoice("What Material do you wish to use?", new std::string[7]{"Goblin Tooth" + aPlayer.myMaterialInventory[0].myAmount,
-				"Wolf Pelt" + aPlayer.myMaterialInventory[1].myAmount, 
-				"Ogre bones" + aPlayer.myMaterialInventory[2].myAmount,
-				"Giant head" + aPlayer.myMaterialInventory[3].myAmount,
-				"Dragonscales" + aPlayer.myMaterialInventory[4].myAmount,
-				"Divine Spark" + aPlayer.myMaterialInventory[5].myAmount,
-				"Draconic core" + aPlayer.myMaterialInventory[6].myAmount },7))
+			switch (aLog.MultipleChoice("Where will you go?", new std::string[2]{ "Onward","Back" }, 2))
 			{
 			case 0:
-				Craft(aPlayer, aLog, 0);
-				system("Pause");
+				if (myRooms[myCurrRoom].myRoomType != 3) {
+					myRooms[myCurrRoom].myRoomCleared = false;
+				}
+				if (myRooms[myCurrRoom].myRoomType == 3) {
+					aLog.Write("As you leave the boss room a gate slams shut behind you, stoicly unmoving\nWhile Moving through to the safe zone you notice your potions upgrading");
+					aPlayer.myPotion.myQuality = std::floor((myCurrStage / 2));
+					aPlayer.myPotion.GiveQuality(aPlayer.myPotion.myQuality);
+				}
+				myCurrRoom++;
 				break;
 			case 1:
-				Craft(aPlayer, aLog, 1);
-				system("Pause");
-				break;
-			case 2:
-				Craft(aPlayer, aLog, 2);
-				system("Pause");
-				break;
-			case 3:
-				Craft(aPlayer, aLog, 3);
-				system("Pause");
-				break;
-			case 4:
-				Craft(aPlayer, aLog, 4);
-				system("Pause");
-				break;
-			case 5:
-				Craft(aPlayer, aLog, 5);
-				system("Pause");
-				break;
-			case 6:
-				Craft(aPlayer, aLog, 6);
-				system("Pause");
+				if (myRooms[myCurrRoom].myRoomType != 3) {
+					myRooms[myCurrRoom].myRoomCleared = false;
+				}
+				if (myRooms[myCurrRoom - 1].myRoomType != 3) {
+					myCurrRoom--;
+				}
+				else if (myRooms[myCurrRoom - 1].myRoomType == 3) {
+					aLog.Write("As you near the gates you remember that they are sealed shut and turn around");
+				}
 				break;
 			}
-		}
-		break;
-	case 7:
-		myLoop = false;
-		break;
+			break;
+		case 1:
+			if (aPlayer.myHp < aPlayer.myMaxHp)
+			{
+				aPlayer.myHp += aPlayer.myMaxHp / 5;
+				aLog.Write("You Regained" + std::to_string(aPlayer.myMaxHp / 5) + "HP!");
+				if (aPlayer.myHp > aPlayer.myMaxHp)
+				{
+					aPlayer.myHp = aPlayer.myMaxHp;
+				}
+			}
+			else if (aPlayer.myHp >= aPlayer.myMaxHp)
+			{
+				aLog.Write("You are already at max HP");
+			}
+			aLog.Write(std::to_string(aPlayer.myHp) + "/" + std::to_string(aPlayer.myMaxHp));
+			system("pause");
+			break;
+		case 2:
+			if (aPlayer.myXp >= (aPlayer.myLevel * 100)) {
+				aPlayer.myXp -= (aPlayer.myLevel * 100);
+				aPlayer.myLevel++;
+				aLog.Write("You leveled up!\nNew level:" + std::to_string(aPlayer.myLevel));
+				aLog.Write(std::to_string(aPlayer.myXp) + "/" + std::to_string(aPlayer.myLevel * 100) + "Xp\n");
+				aPlayer.LevelUp();
+				system("Pause");
 
+			}
+			else
+			{
+				aLog.Write("Not Enough Xp ");
+				aLog.Write(std::to_string(aPlayer.myXp) + "/" + std::to_string(aPlayer.myLevel * 100) + "Xp");
+				system("Pause");
+			}
+			break;
+		case 3:
+			DisplayStats(aPlayer, aLog, false);
+
+			system("pause");
+			break;
+		case 4:
+			switch (aLog.MultipleChoice("Which Weapon?", new std::string[7]{ aPlayer.myInventory[0].myName,aPlayer.myInventory[1].myName,
+				aPlayer.myInventory[2].myName,aPlayer.myInventory[3].myName,
+				aPlayer.myInventory[4].myName,aPlayer.myInventory[5].myName,
+				aPlayer.myInventory[6].myName }, 7))
+			{
+			case 0:
+				EquipWeapon(aPlayer, aLog, aPlayer.myInventory[0]);
+				break;
+			case 1:
+				EquipWeapon(aPlayer, aLog, aPlayer.myInventory[1]);
+				break;
+			case 2:
+				EquipWeapon(aPlayer, aLog, aPlayer.myInventory[2]);
+				break;
+			case 3:
+				EquipWeapon(aPlayer, aLog, aPlayer.myInventory[3]);
+				break;
+			case 4:
+				EquipWeapon(aPlayer, aLog, aPlayer.myInventory[4]);
+				break;
+			case 5:
+				EquipWeapon(aPlayer, aLog, aPlayer.myInventory[5]);
+				break;
+			case 6:
+				EquipWeapon(aPlayer, aLog, aPlayer.myInventory[6]);
+				break;
+			}
+			break;
+		case 5:
+
+			if (myRooms[myCurrRoom].myRoomType == 0) {
+				switch (aLog.MultipleChoice("What Material do you wish to use?", new std::string[7]{ "Goblin Tooth:" + std::to_string(aPlayer.myMaterialInventory[0].myAmount),
+					"Wolf Pelt:" + std::to_string(aPlayer.myMaterialInventory[1].myAmount),
+					"Ogre bones:" + std::to_string(aPlayer.myMaterialInventory[2].myAmount),
+					"Giant head:" + std::to_string(aPlayer.myMaterialInventory[3].myAmount),
+					"Dragonscales:" + std::to_string(aPlayer.myMaterialInventory[4].myAmount),
+					"Divine Spark:" + std::to_string(aPlayer.myMaterialInventory[5].myAmount),
+					"Draconic core:" + std::to_string(aPlayer.myMaterialInventory[6].myAmount) }, 7))
+				{
+				case 0:
+					Craft(aPlayer, aLog, 0);
+					system("Pause");
+					break;
+				case 1:
+					Craft(aPlayer, aLog, 1);
+					system("Pause");
+					break;
+				case 2:
+					Craft(aPlayer, aLog, 2);
+					system("Pause");
+					break;
+				case 3:
+					Craft(aPlayer, aLog, 3);
+					system("Pause");
+					break;
+				case 4:
+					Craft(aPlayer, aLog, 4);
+					system("Pause");
+					break;
+				case 5:
+					Craft(aPlayer, aLog, 5);
+					system("Pause");
+					break;
+				case 6:
+					Craft(aPlayer, aLog, 6);
+					system("Pause");
+					break;
+				}
+			}
+			break;
+		case 6:
+			myLoop = false;
+			break;
+		}
 	}
-	
-	
 }
 
 void Game::DisplayStats(Player& aPlayer, Log& aLog, bool someOnlyStats)
@@ -377,6 +374,8 @@ void Game::DisplayStats(Player& aPlayer, Log& aLog, bool someOnlyStats)
 
 		aLog.Write("Equiped Weapon:");
 		aLog.Write(aPlayer.myEquipedWeapon.myName + ", Potency:" + std::to_string(aPlayer.myEquipedWeapon.myPotency));
+
+		aLog.Write("Potions:" + std::to_string(aPlayer.myPotion.myAmount));
 
 		for (int i = 0; i < sizeof(aPlayer.myInventory);i ++)
 		{
@@ -411,7 +410,7 @@ void Game::Fight(Player& aPlayer, Log& aLog, bool aBoss)
 	int tempFleeChance = 0;
 	float tempOriginalPlayerDef = aPlayer.myDef, tempOriginalEnemyDef = enemy.myDef;
 
-
+	
 	while (tempLoop)
 	{
 		system("CLS");
@@ -468,9 +467,11 @@ void Game::Fight(Player& aPlayer, Log& aLog, bool aBoss)
 				{
 					if (myCurrRoom == 34)
 					{
-						aLog.Write("You Won");
+						aLog.Write("You managed to conquer the dungeon and your legend will be told throughout the land, eternal riches and untold power now lie before you...");
 					}
 					aPlayer.myMaterialInventory[myCurrStage - 1].myAmount++;
+					aPlayer.myPotion.myAmount++;
+
 				}
 			}
 			aPlayer.myXp += enemy.myXpGive;
@@ -480,6 +481,13 @@ void Game::Fight(Player& aPlayer, Log& aLog, bool aBoss)
 		{
 			enemy.myDef = tempOriginalEnemyDef;
 			enemy.EnemyTurn(aPlayer, aLog);
+		}
+		if (aPlayer.myHp <= 0) {
+			aLog.Write("As the darkness closes in, you lament the desitions which led you to fighting a " + enemy.myName + " this underlevelled.");
+			tempLoop = false;
+			myLoop = false;
+			aPlayer.myDead = true;
+			system("pause")
 		}
 
 	}

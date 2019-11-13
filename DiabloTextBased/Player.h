@@ -20,6 +20,7 @@ class Player
 		float myStr, mySpeed, myLuck, myDef, myAcc;
 		float myHp, myMaxHp, myLevel, myXp;
 	    int myRace, myClass;
+		bool myDead;
 
 		ConsumableItem myPotion;
 		Weapons* myInventory, myEquipedWeapon;
