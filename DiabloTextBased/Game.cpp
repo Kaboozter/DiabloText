@@ -466,6 +466,10 @@ void Game::Fight(Player& aPlayer, Log& aLog, bool aBoss)
 				tempDropChance = rand() % 100;
 				if (tempDropChance <= 50)
 				{
+					if (myCurrRoom == 34)
+					{
+						aLog.Write("You Won");
+					}
 					aPlayer.myMaterialInventory[myCurrStage - 1].myAmount++;
 				}
 			}
