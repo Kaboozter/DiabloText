@@ -1,7 +1,7 @@
 #ifndef ITEM_HEADER
 #define ITEM_HEADER
 #include <string>
-#include "Player.h"
+//#include "Player.h"
 #include "Log.h"
 
 class Player;
@@ -33,11 +33,12 @@ public:
 		TypeHealthPotion,
 	};
 
-	void UseItem(Player& aPlayer);
+
+	void GiveQuality(int aQual);
 
 	int myAmount;
 
-	ConsumableItem(int aQual);
+	ConsumableItem();
 	~ConsumableItem();
 
 private:
@@ -55,9 +56,10 @@ public:
 
 	int myStr, mySpeed, myLuck, myDef, myAcc;
 
-	void CreateWeapon();
+	void CreateWeapon(int aQual, int aType, std::string aName);
+	void SetAttribute(int aStr, int aSpeed, int aLuck, int aDef, int aAcc);
 
-	Weapons(int aQual, int aType, std::string aName);
+	Weapons();
 	~Weapons();
 
 	int CalWeaponPot(int aQual, int aType);
@@ -81,11 +83,13 @@ public:
 		DraconicCore
 	};
 
+	void CreateMaterial(int aType);
+
 	std::string myResultName1, myResultName2;
 	float myStr, mySpeed, myLuck, myDef, myAcc;
 	int myAmount;
 
-	Materials(int aType);
+	Materials();
 	~Materials();
 
 private:

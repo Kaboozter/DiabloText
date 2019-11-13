@@ -30,6 +30,7 @@ Enemy::Enemy(int aLevelOfEnemy, bool aBoss)
 Enemy::~Enemy()
 {
 	delete[](myNames);
+	delete[](myBossNames);
 }
 
 

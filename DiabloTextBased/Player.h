@@ -4,8 +4,8 @@
 #include "Item.h"
 
 class Item;
-class Weapons;
 class Materials;
+class ConsumableItem;
 
 class Player
 {
@@ -22,8 +22,10 @@ class Player
 	    int myRace, myClass;
 
 		ConsumableItem myPotion;
-		Weapons* myInventory;
+		Weapons* myInventory, myEquipedWeapon;
 		Materials* myMaterialInventory;
+
+		void UsePotion(Log& aLog);
 
 		void LevelUp();
 

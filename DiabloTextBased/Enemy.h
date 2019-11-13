@@ -7,7 +7,7 @@ class Enemy
 {
 	public:
 		float myHp, myAttack, myDef, myAcc, mySpeed;
-		float myXpGive, myLevel;
+		int myXpGive, myLevel;
 		bool myIsBoss;
 		std::string myName;
 		std::string* myNames, *myBossNames;

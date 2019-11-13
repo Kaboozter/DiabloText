@@ -8,8 +8,10 @@ Player::Player() {
 	myMaxHp = myLevel * 30, myHp = myMaxHp;
 	myClass = 0;
 	myStr = 0, mySpeed = 0, myLuck = 0, myDef = 0, myAcc = 0;
-	myInventory = new Weapons[9];
-	myMaterialInventory = new Materials[10];
+	myInventory = new Weapons[7];
+	myMaterialInventory = new Materials[7];
+	myPotion = ConsumableItem();
+	myEquipedWeapon = Weapons();
 }
 
 Player::~Player()
@@ -84,6 +86,20 @@ void Player::SetStats(bool aRaceOrClass)
 			myLuck += 0;
 			break;
 		}
+	}
+}
+
+void Player::UsePotion(Log& aLog)
+{
+	if (myPotion.myAmount > 0)
+	{
+		myHp += (myMaxHp * myPotion.myPotency);
+		myPotion.myAmount--;
+		aLog.Write(std::to_string(myPotion.myAmount) + " Potions Left");
+	}
+	else
+	{
+		aLog.Write("Not enough potions");
 	}
 }
 
